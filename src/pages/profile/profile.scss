@@ -1,0 +1,46 @@
+profile-page {
+    .profile-info {
+        background-color: #FFF;
+        width: 100%;
+        padding: 10px 0;
+
+        td {
+            vertical-align: top
+        }
+
+        ion-list {
+            margin: 0 !important;
+
+            ion-item {
+                &:first-child{
+                    border-top: none !important;
+                }
+                &:last-child{
+                    border-bottom: none !important;
+                }
+            }
+        }
+
+        .user-image {
+            margin-top: 12px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    }
+
+    .twitter-icon {
+        color: #00aced;
+    }
+
+    .facebook-icon {
+        color: #3b5998;
+    }
+
+    button.logout {
+        color: appColor('red-primary');
+    }
+}

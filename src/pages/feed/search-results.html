@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons start>
+            <button ion-button
+              navPop
+              icon-left>
+        <ion-icon name="arrow-back"></ion-icon>
+        <strong>Feed</strong>
+      </button>
+        </ion-buttons>
+
+        <ion-title>Search Results</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <br>
+    <br>
+
+    <p *ngIf="loading"
+      color="gold-primary-muted"
+      text-center>
+        <strong>Loading...</strong>
+    </p>
+
+    <ion-list>
+        <video-item *ngFor="let result of results"
+          [video]="result">
+        </video-item>
+    </ion-list>
+
+    <div [hidden]="!allResultsLoaded">
+        <img src="assets/img/icon-black.png"
+          class="loading-icon"
+          opacity-10>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="moreResults($event)"
+      threshold="50%">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,129 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons start>
+            <button ion-button
+              navPop>
+        Cancel
+      </button>
+        </ion-buttons>
+
+        <ion-title>Log In</ion-title>
+
+        <ion-buttons end>
+            <button ion-button
+              [disabled]="!form.form.valid || form.loading"
+              (click)="form.submit(isModal)">
+              Log In
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="login">
+    <br>
+    <br>
+    <login-form #form>
+        <auth-form-errors [errors]="form.errors"></auth-form-errors>
+
+        <form class="auth-form"
+          *ngIf="form.form"
+          [formGroup]="form.form"
+          (keypress)="$event.keyCode == 13 ? form.submit(isModal) : ''">
+            <ion-list padding-left
+              class="login-list">
+                <ion-item>
+                    <ion-icon name="ios-mail-outline"
+                      color="icon-primary"
+                      item-left></ion-icon>
+                    <ion-input type="email"
+                      required
+                      placeholder="Email"
+                      formControlName="userName">
+                    </ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="ios-lock-outline"
+                      color="icon-primary"
+                      item-left></ion-icon>
+                    <ion-input type="password"
+                      required
+                      minlength="8"
+                      maxlength="15"
+                      placeholder="Password"
+                      formControlName="password">
+                    </ion-input>
+                </ion-item>
+            </ion-list>
+        </form>
+
+        <!--
+        <ion-grid text-center
+          class="social-signup"
+          hidden>
+          <ion-row hidden>
+              <ion-col width-35>
+                  <div class="or-line-break-left"></div>
+              </ion-col>
+
+              <ion-col text-center
+                class="or"
+                width-25>
+                  or login with
+              </ion-col>
+
+              <ion-col width-35>
+                  <div class="or-line-break-right"></div>
+              </ion-col>
+          </ion-row>
+
+            <ion-row>
+                <ion-col width-50>
+                    <button ion-button
+                      block
+                      outline
+                      icon-left>
+            <ion-icon name="logo-twitter"></ion-icon>
+            Twitter
+          </button>
+                </ion-col>
+
+                <ion-col width-50>
+                    <button ion-button
+                      block
+                      outline
+                      icon-left
+                      (click)="form.loginWithFacebook()">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                    Facebook
+                  </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid> -->
+    </login-form>
+    <p text-center
+      color="gray-dark">
+        Passwords require 8 to 15 characters.
+    </p>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="white"
+      text-center
+      no-border
+      position="bottom"
+      class="login-already">
+        <ion-buttons>
+            <button ion-button
+              full
+              color="white"
+              no-padding
+              [navPush]="forgotPassword">
+        <small font-size="80%">
+          <span color="text-gray">Forgot Password?</span>&nbsp;
+          <strong color="red-primary">Get Help</strong>
+         </small>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

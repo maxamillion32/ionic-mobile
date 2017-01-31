@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons start>
+      <button ion-button
+        icon-left
+        navPop>
+        <ion-icon name="arrow-back"></ion-icon>
+        <strong>Feed</strong>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Series</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <content *ngIf="series">
+    <video-image [imageUrl]="series.SeriesBranding">
+    </video-image>
+    <ion-grid padding
+      color="white">
+      <ion-row>
+        <ion-col width-80>
+          <h2>{{ series.Name | decode }}</h2>
+        </ion-col>
+
+        <ion-col width-20>
+          <button ion-button
+            outline
+            color="gold-primary"
+            square
+            icon-only
+            (click)="share()">
+                    <ion-icon class="icon-share"
+                      color="gold-primary">
+                    </ion-icon>
+                </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <p>
+
+            <span class="desc"
+              color="tan-darker">{{ series.Date }}</span>&nbsp; &middot;
+            {{ series.Description }}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </content>
+
+  <clips-sermons-segment [series]="series">
+  </clips-sermons-segment>
+</ion-content>

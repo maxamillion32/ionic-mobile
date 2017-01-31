@@ -1,0 +1,41 @@
+<div id="main-content"
+  *ngIf="video">
+    <video-image [imageUrl]="video.FeaturedImage"></video-image>
+    <content>
+        <ion-grid>
+            <ion-row>
+                <ion-col width-75>
+                    <h4 color="gold-primary-muted"
+                      no-margin>{{ nextWeekText }}</h4>
+                    <h1 color="white"
+                      no-margin>{{ video.PostTitle }}</h1>
+                </ion-col>
+                <ion-col width-25
+                  text-right>
+                    <button ion-button
+                      color="gray-light"
+                      class="share"
+                      outline
+                      icon-only
+                      square
+                      (click)="share()">
+            <ion-icon class="icon-share"
+              color="white">
+            </ion-icon>
+          </button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </content>
+
+    <button ion-button
+      clear
+      class="play-button"
+      (click)="openVideo()"
+      icon-only>
+    <ion-icon color="white"
+      class="icon-play">
+    </ion-icon>
+  </button>
+</div>

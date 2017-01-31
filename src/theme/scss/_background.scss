@@ -1,0 +1,8 @@
+// Background color classes
+@each $name, $color in $colors {
+    @include bg-color-class($name, $color);
+}
+
+[clear] {
+    background: transparent;
+}

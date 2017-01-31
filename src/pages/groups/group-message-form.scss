@@ -1,0 +1,12 @@
+.ql-container{
+    -webkit-user-select: text;
+    user-select: text;
+    border: none !important;
+    font-family: inherit !important;
+    font-size: 1em !important;
+    font-weight: 400;
+
+    .ql-editor {
+        min-height: 100px;
+    }
+}

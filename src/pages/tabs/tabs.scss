@@ -1,0 +1,51 @@
+$tab-icon-family: "12stone-mobile-icons";
+$tab-icon-list: (e906, e907), (e904, e905), (e900, e901), (e902, e903);
+
+.footer-tabs {
+    .tabbar {
+        background: #FFF;
+
+        &[role="tablist"] {
+            background: #FFF;
+            border-top: solid 1px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: map-get($colors, 'gold-primary-muted');
+            min-height: 48px;
+
+            &[aria-selected=true] {
+                color: map-get($colors, 'gold-primary');
+            }
+
+            ion-icon {
+                font-family: $tab-icon-family;
+                font-size: 28px;
+                line-height: 28px;
+                height: 28px;
+
+                &:before {
+                    font-family: $tab-icon-family;
+                }
+            }
+
+            @each $icon in $tab-icon-list {
+                $index: index($tab-icon-list, $icon);
+
+                &:nth-of-type(#{$index}) {
+                    ion-icon {
+                        &:before {
+                            content: unquote("\"\\#{nth($icon, 1)}\"");
+                        }
+
+                        &[class$=-outline] {
+                            &:before {
+                                content: unquote("\"\\#{nth($icon, 2)}\"");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+filter-groups-page,
+search-assist-days  {
+    search-filter {
+        &[key="MeetingDays"] {
+            ion-list {
+                > div {
+                    background-color: white;
+                    padding: 16px 10px;
+
+                    &:after {
+                        display: block;
+                        content: "";
+                        clear: both;
+                    }
+
+                    ion-item {
+                        float: left;
+                        width: 13.5%;
+                        padding: 0;
+                        border-color: appColor('gold-primary');
+                        border-width: 1px;
+                        border-style: solid;
+                        color: appColor('gold-primary');
+
+                        + ion-item {
+                            border-left: none;
+                        }
+
+                        &:first-of-type{
+                            margin-left: 2.25%;
+                            border-top-left-radius: 8px;
+                            border-bottom-left-radius: 8px;
+                            border-top: solid 1px;
+                        }
+
+                        &:last-of-type{
+                            margin-right: 2.25%;
+                            border-top-right-radius: 8px;
+                            border-bottom-right-radius: 8px;
+                            border: solid 1px;
+                            border-left: none;
+                        }
+
+                        &.item-checkbox-checked {
+                            background-color: appColor('gold-primary');
+                            color: white;
+                        }
+
+                        .item-inner {
+                            padding: 0;
+                            border: none;
+
+                            .input-wrapper {
+                                width: 100%;
+
+                                ion-label {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    text-align: center;
+                                }
+                            }
+
+                            ion-checkbox {
+                                opacity: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,155 @@
+
+<ion-header>
+    <ion-navbar [hideBackButton]="isModal">
+        <ion-buttons start 
+          *ngIf="isModal">
+            <button ion-button
+              (click)="cancel()">
+        Cancel
+      </button>
+        </ion-buttons>
+        <ion-title>{{ pageTitle }}</ion-title>
+
+        <ion-buttons end>
+            <button ion-button
+              (click)="submit()"
+              [disabled]="!form.valid">
+        Sign Up
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="profile">
+    <auth-form-errors [errors]="errors"></auth-form-errors>
+    <div class="img-container"
+      text-center
+      padding-top>
+        <img src="assets/img/login-logo.png"
+          alt=""
+          width="146">
+    </div>
+
+    <p text-center
+      color="gray-dark">
+        Join small groups, submit prayer requests and more.
+    </p>
+
+    <form class="auth-form"
+      [formGroup]="form"
+      (keypress)="$event.keyCode == 13 ? submit() : ''">
+        <ion-list>
+            <ion-item-group class="name">
+                <ion-item class="first-name"
+                  width-50>
+                    <ion-icon class="icon-profile-outline"
+                      color="icon-primary"
+                      item-left></ion-icon>
+                    <ion-label floating style="margin-top:8px;min-height:20px;">First Name</ion-label>
+                    <ion-input required
+                      type="text"
+                      formControlName="firstName"></ion-input>
+                </ion-item>
+                <ion-item class="last-name"
+                  width-50>
+                    <ion-label floating style="margin-top:8px;min-height:20px;">Last Name</ion-label>
+                    <ion-input required
+                      type="text"
+                      formControlName="lastName"></ion-input>
+                </ion-item>
+            </ion-item-group>
+
+            <ion-item>
+                <ion-icon name="ios-mail-outline"
+                  color="icon-primary"
+                  item-left></ion-icon>
+                <ion-label floating style="margin-top:8px;min-height:20px;">Email</ion-label>
+                <ion-input required
+                  type="email"
+                  formControlName="email"></ion-input>
+            </ion-item>
+
+            <ion-item padding-bottom>
+                <ion-icon name="ios-lock-outline"
+                  color="icon-primary"
+                  item-left></ion-icon>
+                <ion-label floating style="margin-top:8px;min-height:20px;">Password</ion-label>
+                <ion-input required
+                  type="password"
+                  minlength="8"
+                  maxlength="15"
+                  formControlName="password"></ion-input>
+            </ion-item>
+        </ion-list>
+    </form>
+    <p text-center
+      color="gray-dark">
+        Passwords require 8 to 15 characters.
+    </p>
+
+    <ion-row hidden>
+        <ion-col width-42>
+            <div class="or-line-break-left"></div>
+        </ion-col>
+
+        <ion-col text-center
+          color="gray-dark"
+          class="or"
+          width-10>
+            or
+        </ion-col>
+
+        <ion-col width-42>
+            <div class="or-line-break-right"></div>
+        </ion-col>
+    </ion-row>
+
+    <ion-grid text-center
+      class="social-signup"
+      hidden>
+        <ion-row>
+            <ion-col width-50>
+                <button ion-button
+                  block
+                  outline
+                  icon-left>
+          <ion-icon name="logo-twitter"></ion-icon>
+          Twitter
+        </button>
+            </ion-col>
+
+            <ion-col width-50>
+                <button ion-button
+                  block
+                  outline
+                  (click)="loginWithFacebook()"
+                  icon-left>
+          <ion-icon name="logo-facebook"></ion-icon>
+          Facebook
+        </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="white"
+      text-center
+      no-border
+      position="bottom"
+      class="login-already">
+        <ion-buttons>
+            <button ion-button
+              full
+              color="white"
+              no-padding
+              [navPush]="loginPage"
+              [navParams]="loginParams">
+        <small style="font-size: 80%;">
+             <span color="text-gray">Already have an account?</span>&nbsp;
+             <strong color="red-primary">Log in</strong>
+         </small>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

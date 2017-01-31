@@ -1,0 +1,21 @@
+ <ion-item text-wrap [hidden]="removed">
+            <user-image [user]="comment.User"
+                imageSize="Thumbnail"
+                width="36"
+                item-left>
+            </user-image>
+
+            <h2>{{ comment.User.FullName }}</h2>&nbsp;
+            <small color="gray-base"> &middot; {{ comment.TimeAgo }}</small>
+
+            <br>
+
+            <p [innerHtml]="comment.Body"></p>
+
+            <div *ngIf="auth.user()?.can('edit-comment', comment.ChatId)"
+                text-right>
+                <a color="red-primary" (click)="deleteComment()">
+                    <small>Delete</small>
+                </a>
+            </div>
+        </ion-item>

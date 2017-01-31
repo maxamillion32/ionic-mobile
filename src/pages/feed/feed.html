@@ -1,0 +1,72 @@
+<ion-header no-border>
+  <ion-navbar>
+      <ion-searchbar
+        (ionCancel)="isSearching(false)"
+        (ionFocus)="isSearching(true)"
+        [(ngModel)]="searchQuery"
+        [disabled]="isSearchingTransition"
+        (keyup.enter)="search(searchQuery)"
+        placeholder="Search">
+      </ion-searchbar>
+
+      <ion-buttons end [hidden]="!searching">
+        <button ion-button (click)="isSearching(false)" text-bold>
+          <strong>Cancel</strong>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [hidden]="!searching">
+  <feed-search (tagSelected)="search($event)"
+    #feedSearch>
+  </feed-search>
+</ion-content>
+
+<ion-content fullscreen
+  class="feed"
+  [hidden]="searching">
+  <ion-refresher (ionRefresh)="refreshSeries($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Start Next Week -->
+  <div *ngIf="nextWeekVideo">
+    <next-week [video]="nextWeekVideo" [nextWeekText]="nextWeekText"></next-week>
+    <br>
+  </div>
+  <!-- End Next Week -->
+
+  <!-- Start Latest Message -->
+  <ion-list *ngIf="latestMessage">
+    <ion-list-header floating>
+      <strong text-uppercase>Latest Message</strong>
+    </ion-list-header>
+
+    <video-item no-border [video]="latestMessage"></video-item>
+  </ion-list>
+  <!-- End Latest Message -->
+
+  <!-- Start Series Cards -->
+  <div *ngIf="series && series.length">
+    <ion-list no-margin>
+      <ion-list-header floating>
+        <strong text-uppercase>Past Series</strong>
+      </ion-list-header>
+    </ion-list>
+
+    <series-card *ngFor="let series of series"
+      [series]="series">
+    </series-card>
+  </div>
+  <!-- End Series Cards -->
+
+  <div [hidden]="!allSeriesLoaded">
+    <img src="assets/img/icon-black.png" class="loading-icon" opacity-10>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="loadSeries($event)"
+    threshold="50%">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-list padding-top *ngIf="filters">
+            <ion-list-header floating
+                *ngIf="title">{{ title }}
+            </ion-list-header>
+
+            <div>
+              <ion-item *ngFor="let filter of (filters | sortByValue:sort)">
+                <ion-label *ngIf="key != 'MeetingDays'">{{ filter.Name }}</ion-label>
+                <ion-label *ngIf="key == 'MeetingDays'">{{ filter.Name.substr(0, 2) }}</ion-label>
+                <ion-checkbox item-right
+                  [checked]="filter.active"
+                  *ngIf="type == 'checkbox'"
+                  (ionChange)="toggleFilter($event, filter)">
+                </ion-checkbox>
+
+                  <ion-radio item-right
+                    [checked]="filter.active"
+                    *ngIf="type == 'radio'"
+                    (ionChange)="toggleFilter($event, filter)">
+                  </ion-radio>
+              </ion-item>
+            </div>
+
+            <ng-content></ng-content>
+          </ion-list>

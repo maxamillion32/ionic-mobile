@@ -1,0 +1,57 @@
+        <div [navPush]="pushPage" [navParams]="params">
+            <ion-card class="group-card">
+              <ion-list>
+                <button ion-item detail-none
+                    [navPush]="pushPage"
+                    [navParams]="params">
+                  <ion-avatar item-left>
+                    <group-image [group]="group"
+                        width="100"
+                        [imageUrl]="group.ImageUrl">
+                    </group-image>
+                  </ion-avatar>
+                  <h2>{{ group.GroupName }}</h2>
+                  <p *ngIf="group.GroupFocus">{{ group.GroupFocus }}</p>
+
+                </button>
+                <button ion-item detail-none
+                    [navPush]="pushPage"
+                    [navParams]="params">
+
+                    <ion-grid no-padding>
+                        <ion-row>
+                            <ion-col no-padding>
+                                <p text-left>
+                                  <strong item-left>{{ group.GroupMakeup }}</strong>
+                                 </p>
+                            </ion-col>
+                            <ion-col no-padding>
+                                 <p text-right>
+                                   <span *ngIf="!group.Participant"
+                                        color="gold-primary"
+                                        [ngClass]="{'text-color-red-primary': group.NearCapacity || !group.SlotsRemaining}">
+                                        {{ group.SlotsRemaining }} Spot<span *ngIf="group.SlotsRemaining > 1 || group.SlotsRemaining == 0">s</span> Left
+                                   </span>
+                                 </p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+                    <ion-grid no-padding>
+                        <ion-row>
+                            <ion-col no-padding width-25>
+                                <p text-left>
+                                  <span *ngIf="group.MeetingDay">{{ group.MeetingDay }}</span>
+                                 </p>
+                            </ion-col>
+                            <ion-col no-padding>
+                                 <p text-right>
+                                   <span *ngIf="group.Time">{{ group.Time }}</span>
+                                 </p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </button>
+              </ion-list>
+            </ion-card>
+        </div>

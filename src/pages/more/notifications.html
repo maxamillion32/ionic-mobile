@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Notifications</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="loadNotifications($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <p color="gold-primary-muted"
+    text-center *ngIf="loading"><strong>Loading Notifications...</strong></p>
+  <p color="gold-primary-muted"
+    text-center *ngIf="!loading && notifications.length == 0"><strong>No current notifications</strong></p>
+
+  <ion-list padding-top margin-top *ngIf="!loading && notifications.length > 0">
+      <ion-item *ngFor="let notification of notifications" (click)="processNotification(notification)" [style.backgroundColor]="getItemBackgroundColor(notification)">
+        <ion-avatar item-left>
+          <user-image [user]="getUser(notification)" imageSize="Thumbnail" width="36"></user-image>
+        </ion-avatar>
+        <div [innerHtml]="getMessage(notification)" style="word-wrap: break-word; white-space: normal; font-size: 1.4rem;"></div>
+        <small color="gray-base">{{ getTimeAgo(notification) }}</small>
+      </ion-item>
+  </ion-list>
+
+</ion-content>

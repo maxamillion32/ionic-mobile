@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons start>
+      <button ion-button
+        (click)="apply()">
+        <strong>Cancel</strong>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Filter</ion-title>
+
+    <ion-buttons end>
+      <button ion-button
+        (click)="apply()">
+        <strong>Apply</strong>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="filters"
+  padding-top
+  padding-bottom>
+
+  <h5 class="text-color-text-gray"
+    padding
+    text-center
+    no-margin>
+    Check all that apply
+  </h5>
+
+  <div *ngIf="ready">
+    <!-- Start Small Groups -->
+    <search-filter title="Small Groups"
+      key="GroupMakeups"
+      identifier="GroupMakeupIds"
+      [form]="form"
+      (toggle)="updateFilter($event)">
+    </search-filter>
+
+    <search-filter title="Days of the Week"
+      [sort]="true"
+      key="MeetingDays"
+      identifier="MeetingDayIds"
+      [form]="form"
+      (toggle)="updateFilter($event)">
+    </search-filter>
+
+    <search-filter title="Topic"
+      key="GroupFocuses"
+      identifier="GroupFocusIds"
+      [form]="form"
+      (toggle)="updateFilter($event)">
+    </search-filter>
+
+    <search-filter title="Childcare"
+        key="ChildcareAvailableTypes"
+        identifier="ChildcareAvailableIds"
+        [form]="form"
+        (toggle)="updateFilter($event)">
+      </search-filter> 
+    <!-- End Small Groups -->
+
+    <!-- Start Student -->
+    <!-- <search-filter title="Campus"
+        key="Congregations"
+        identifier="CampusIds"
+        [form]="form"
+        (toggle)="updateFilter($event)">
+      </search-filter>
+
+      <search-filter title="Gender"
+        key="Genders"
+        identifier="GenderIds"
+        [form]="form"
+        (toggle)="updateFilter($event)">
+      </search-filter> -->
+    <!-- End Student -->
+
+    <!-- Start Volunteer Teams -->
+    <!-- <search-filter title="Campus"
+        key="Congregations"
+        identifier="CampusIds"
+        [form]="form"
+        (toggle)="updateFilter($event)">
+      </search-filter> -->
+    <!-- End Volunteer Teams -->
+  </div>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-tabs class="footer-tabs"
+  no-top-border>
+  <ion-tab [root]="tab1Root"
+    tabTitle="Feed"
+    tabIcon="cog"
+    class="feed">
+  </ion-tab>
+
+  <ion-tab [root]="tab2Root"
+    [swipeBackEnabled]="false"
+    tabTitle="Groups"
+    tabIcon="cog"
+    class="groups">
+  </ion-tab>
+
+  <ion-tab [root]="tab3Root"
+    tabTitle="Profile"
+    tabIcon="cog"
+    class="profile">
+  </ion-tab>
+
+  <ion-tab [root]="tab4Root"
+    tabTitle="More"
+    tabIcon="cog"
+    class="more"
+    [tabBadge]="badgeCount">
+  </ion-tab>
+
+</ion-tabs>

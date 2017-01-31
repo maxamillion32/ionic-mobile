@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="113px"
+    height="113px"
+    viewBox="0 0 113 113"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:space="preserve"
+    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g>
+        <circle cx="0" cy="0" transform="translate(56.25 56.25)" r="56.25" style="fill:#0c7698;fill-opacity:0.2;">
+            <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" begin="0s" dur="3s" additive="sum" values="0.75;1;0.75"/>
+        </circle>
+
+        <circle cx="56.25" cy="56.25" r="28.125" style="fill:url(#_Linear1);stroke-width:3.75px;stroke:#fff;"/>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(56.25,0,0,56.25,28.125,56.25)"><stop offset="0%" style="stop-color:#0c7799;stop-opacity:1"/><stop offset="54%" style="stop-color:#1880a1;stop-opacity:1"/><stop offset="100%" style="stop-color:#42a1bf;stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>

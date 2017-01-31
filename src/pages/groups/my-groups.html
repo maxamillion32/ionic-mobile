@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="white">
+    <ion-title>My Groups</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding-top
+  padding-bottom>
+  <ion-refresher *ngIf="isAuthenticated()" (ionRefresh)="refreshGroups($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <p *ngIf="groupsLoading && auth.user()"
+    color="gold-primary-muted"
+    text-center>
+    <strong>Loading Groups...</strong>
+  </p>
+
+  <br>
+
+  <div *ngIf="!auth.user() || !groups && !groupsLoading || groups && groups.length <= 0"
+    text-center>
+    <h3 color="gray-light">Ready to join a group?</h3>
+  </div>
+
+  <div *ngIf="!groupsLoading">
+    <group-card *ngFor="let group of groups"
+      [group]="group">
+    </group-card>
+  </div>
+
+  <br>
+  <br>
+
+  <button ion-button
+    full
+    color="white"
+    text-red
+    (click)="goToGroups()"
+    [hidden]="groupsLoading"
+    [disabled]="!mapService.map">
+    <span color="red-primary"><b>Find a group</b></span>
+  </button>
+
+  <br>
+  <br>
+  <button ion-button
+    *ngIf="!auth.user()"
+    full
+    color="white"
+    no-padding
+    (click)='openLoginModal()'>
+    <span color="text-gray">Already part of a group?</span>&nbsp;
+    <strong color="red-primary">Log in</strong>
+  </button>
+
+</ion-content>

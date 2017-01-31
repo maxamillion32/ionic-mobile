@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons>
+          <button ion-button
+            navPop
+            icon-left>
+              <ion-icon name="arrow-back"></ion-icon>
+              Back
+          </button>
+        </ion-buttons>
+
+        <ion-title>Message</ion-title>
+
+        <ion-buttons end
+          *ngIf="message && auth.user()?.can('edit-message', message.ChatId)">
+            <button ion-button
+              icon-right
+              (click)="presentActions($event)">
+              <ion-icon class="icon-more-horizontal"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="messageCard.refreshComments($event)"
+      [enabled]="group && message">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div *ngIf="group && message">
+        <group-message-card [message]="message"
+          [group]="group"
+          [displayComments]="true">
+        </group-message-card>
+    </div>
+
+    <div [hidden]="!messageCard?.allCommentsLoaded">
+        <img src="assets/img/icon-black.png"
+          class="loading-icon"
+          opacity-10>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="messageCard.loadComments($event)"
+      threshold="25%">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="white" *ngIf="message && auth.user()?.can('write-comment', message.ChatId)">
+        <ion-buttons start>
+            <user-image [user]="auth.user()"
+              imageSize="Thumbnail"
+              width="36">
+            </user-image>
+        </ion-buttons>
+        <form (submit)="postComment()">
+            <input type="text"
+              placeholder="Write a comment"
+              [(ngModel)]="comment.Body"
+              name="comment_body">
+        </form>
+        <ion-buttons end>
+            <button ion-button
+              clear
+              (click)="postComment()"
+              [disabled]="loading">
+        <strong color="red-primary">Send</strong>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

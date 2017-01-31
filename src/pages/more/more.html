@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>More</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="more">
+
+  <br>
+
+  <ion-list padding-top margin-top *ngIf="notificationsAllowed">
+    <button ion-item (click)="navNotificationsPage()">
+      <ion-icon class="icon-sms-outline"
+                  color="red-primary" item-left></ion-icon>
+      <div style="float: left; text-align: left; width: 50%;">
+        Notifications
+      </div>
+      <div style="float: left; text-align: right; width: 50%;">
+        <span *ngIf="badgeCount > 0" style="background-color: #893726; padding: 5px; color: white;">{{badgeCount}}</span>
+      </div>
+    </button>
+  </ion-list>
+
+  <ion-list padding-top
+    margin-top>
+    <button ion-item
+      (click)="openLink('https://12stone.com/give')">
+        <ion-icon name="ios-filing-outline" class="icon" item-left></ion-icon>
+        Online Giving
+    </button>
+
+    <button ion-item
+      (click)="navPrayerRequest()">
+        <ion-icon name="ios-paper-plane-outline" class="icon" item-left></ion-icon>
+          Prayer Request
+    </button>
+  </ion-list>
+
+  <ion-list>
+    <button ion-item
+      (click)="navSettingsPage()" *ngIf="displaySettings">
+      <ion-icon name="ios-settings-outline" class="icon" item-left></ion-icon>
+      Settings
+    </button>
+    <button ion-item
+      (click)="navSuggestionsPage()">
+      <ion-icon name="ios-archive-outline" class="icon" item-left></ion-icon>
+      Suggestions
+    </button>
+    <button ion-item
+      (click)="navAboutPage()">
+      <ion-icon name="ios-information-circle-outline" class="icon" item-left></ion-icon>
+      About the App
+    </button>
+  </ion-list>
+</ion-content>

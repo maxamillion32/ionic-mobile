@@ -1,0 +1,46 @@
+.feed-search-tags {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 300;
+    padding-bottom: 20px;
+
+    h2 {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    ion-list-header {
+        font-weight: 600;
+        color: appColor('tan-darker');
+        border-bottom: none;
+        letter-spacing: normal;
+
+        ion-label {
+            margin-top: 6px;
+            margin-bottom: 0px;
+        }
+    }
+}
+
+body.feed-searching {
+    .feed-component {
+        ion-header {
+            ion-searchbar {
+                button.searchbar-ios-cancel {
+                    display: block;
+                    font-weight: 600;
+                    margin-right: 0 !important;
+                    opacity: 1;
+                    padding-left: 8px;
+                    pointer-events: all;
+                }
+            }
+        }
+    }
+    ion-tabbar {
+        //display: none;
+    }
+}

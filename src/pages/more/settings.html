@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="loading" (click)="updateSettings()">
+        Save
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <p color="gold-primary-muted"
+    text-center *ngIf="loading"><strong>Loading Settings...</strong></p>
+  <ion-list padding-top margin-top *ngIf="!loading">
+      <ion-item>
+        <ion-icon name="notifications" item-left></ion-icon>
+        <ion-label>In-App Notifications</ion-label>
+        <ion-toggle [(ngModel)]="settings.AllowInAppNotifications"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="contact" item-left></ion-icon>
+        <ion-label>Hide Contact Info</ion-label>
+        <ion-toggle [(ngModel)]="settings.HideContactInfo"></ion-toggle>
+      </ion-item>
+  </ion-list>
+
+</ion-content>

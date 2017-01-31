@@ -1,0 +1,18 @@
+  <form [formGroup]="form">
+            <ion-searchbar placeholder="Search Groups"
+                type="search"
+                formControlName="SearchString"
+                (keyup.enter)="onType($event)"
+                (ionClear)="clearSearch()">
+            </ion-searchbar>
+
+            <button ion-button (click)="myLocation($event)"
+              clear
+              class="location"
+              [hidden]="!locationAvailable" icon-only>
+
+              <ion-icon class="icon-compass-arrow"
+                color="blue-primary">
+              </ion-icon>
+            </button>
+        </form>

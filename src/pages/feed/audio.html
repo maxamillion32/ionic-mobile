@@ -1,0 +1,200 @@
+<ion-header class="media-header">
+    <ion-toolbar clear
+      no-border>
+        <ion-buttons start>
+            <button ion-button
+              navPop
+              icon-left>
+        <ion-icon class="icon-cross"
+          color="white">
+        </ion-icon>
+      </button>
+        </ion-buttons>
+
+        <ion-title color="white">
+            <small text-uppercase>Playing from Series</small>
+            <br> {{video.Series.Name}}
+        </ion-title>
+
+        <ion-buttons end>
+            <button ion-button
+              (click)="toggleMinimize()"
+              icon-right>
+        <ion-icon class="icon-arrow-down"
+          color="white">
+        </ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-toolbar id="minimized-bar"
+  color="gold-primary"
+  [hidden]="!minimized">
+
+    <div class="progress"
+      [style.width]="audioService.listened + '%'">
+    </div>
+
+    <ion-buttons start>
+        <button ion-button
+          (click)="audioService.play()"
+          [hidden]="audioService.playing"
+          icon-only>
+      <ion-icon class="icon-play">
+      </ion-icon>
+    </button>
+        <button ion-button
+          [hidden]="!audioService.playing"
+          (click)="audioService.pause()"
+          icon-only>
+      <ion-icon class="icon-pause">
+      </ion-icon>
+    </button>
+    </ion-buttons>
+
+    <ion-title color="white">
+        {{ video.PostTitle }}
+        <br><small>{{ video.Series.Name }}</small>
+    </ion-title>
+
+    <ion-buttons end>
+        <button ion-button
+          (click)="toggleMinimize()"
+          icon-right>
+      <ion-icon class="icon-arrow-up"></ion-icon>
+    </button>
+    </ion-buttons>
+
+</ion-toolbar>
+
+<div class="backdrop"
+  [style.background-image]="'url('+ video.imageurl +')'"
+  [class.minimized]="minimized">
+</div>
+
+<ion-content class="bg-color-gray-darkest media">
+
+    <content>
+        <video-image *ngIf="video.Series"
+          [imageUrl]="video.Series.SeriesBranding">
+        </video-image>
+
+        <!-- Start Video Info -->
+        <ion-grid padding
+          *ngIf="video">
+            <ion-row>
+                <ion-col width-80>
+                    <h2 color="white">{{ video.PostTitle }}</h2>
+                    <p color="gray-light">{{ video.Date }}</p>
+
+                    <!-- <p color="gray-base"
+                      *ngIf="video.Tags">
+                        <span *ngFor="let tag of video.Tags">
+                          #{{ tag }}
+                          <span *ngIf="!last"> </span>
+                        </span>
+                    </p> -->
+                </ion-col>
+                <ion-col width-20>
+                    <button ion-button
+                      outline
+                      color="gold-primary-muted"
+                      square
+                      (click)="share()"
+                      icon-only>
+            <ion-icon class="icon-share"
+              color="gold-primary-muted"></ion-icon>
+          </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <!-- End Video Info -->
+
+        <!-- Start Listen Block -->
+        <ion-grid class="related-block">
+            <ion-row>
+                <ion-col width-100>
+                    <button ion-button
+                      clear
+                      color="white"
+                      (click)="openVideo()"
+                      icon-only>
+            <ion-icon name="volume-down"></ion-icon>
+            <strong>Watch</strong>
+          </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <!-- End Listen Block -->
+
+    </content>
+</ion-content>
+<ion-footer>
+    <ion-toolbar clear
+      no-border>
+        <audio #audioElement
+          [title]="video.Name">
+      <source [src]="video?.AudioUrl"
+        type="audio/mp3"> Your browser does not support the audio element.
+    </audio>
+
+        <ion-item class="audio-controls seek">
+            <ion-range [(ngModel)]="audioService.listened"
+              min="0"
+              max="100">
+                <ion-label range-left
+                  text-left
+                  color="white">
+                    <span>{{ audioService.currentTime }}</span>
+                </ion-label>
+
+                <ion-label range-right
+                  text-right
+                  color="white">
+                    <span>-{{ audioService.timeRemaining }}</span>
+                </ion-label>
+            </ion-range>
+        </ion-item>
+
+        <ion-grid text-center
+          class="button-controls">
+            <ion-row center>
+                <ion-col width-25>
+                    <button ion-button
+                      (click)="audioService.seekJump('back')"
+                      clear
+                      icon-only>
+            <ion-icon class="icon-prev-30"></ion-icon>
+          </button>
+                </ion-col>
+                <ion-col width-50>
+                    <button ion-button
+                      (click)="audioService.play()"
+                      [hidden]="audioService.playing"
+                      class="play-button"
+                      clear
+                      icon-only>
+            <ion-icon class="icon-play"></ion-icon>
+          </button>
+                    <button ion-button
+                      (click)="audioService.pause()"
+                      [hidden]="!audioService.playing"
+                      class="pause-button"
+                      clear
+                      icon-only>
+            <ion-icon class="icon-pause"></ion-icon>
+          </button>
+                </ion-col>
+                <ion-col width-25>
+                    <button ion-button
+                      (click)="audioService.seekJump('forward')"
+                      clear
+                      icon-only>
+            <ion-icon class="icon-next-30"></ion-icon>
+          </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

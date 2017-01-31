@@ -1,0 +1,21 @@
+<ion-card class="series-card"
+  *ngIf="series">
+  <div [navPush]="seriesPage"
+      [navParams]="getNavParams()">
+      <video-image class="series-image"
+          [imageUrl]="series.SeriesBranding">
+      </video-image>
+  </div>
+
+  <ion-list>
+    <video-item *ngFor="let video of series.FeedVideos"
+      [video]="video">
+    </video-item>
+
+    <button ion-item
+      [navPush]="seriesPage"
+      [navParams]="getNavParams()">
+      <strong color="red-primary">See more from this series</strong>
+    </button>
+  </ion-list>
+</ion-card>

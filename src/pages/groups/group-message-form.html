@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons start>
+            <button ion-button
+              navPop>
+        Cancel
+      </button>
+        </ion-buttons>
+
+        <ion-title>{{ group.GroupName }}</ion-title>
+
+        <ion-buttons end>
+            <button ion-button
+              (click)="submit()"
+              [disabled]="!form.valid">
+        <span [hidden]="message">Send</span>
+        <span [hidden]="!message">Save</span>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-color-white">
+    <form [formGroup]="form"
+      (ngSubmit)="post()">
+        <ion-list no-border>
+            <ion-item>
+                <ion-label color="primary">Title</ion-label>
+                <ion-input placeholder="Write a title for this message..."
+                  required
+                  formControlName="Title">
+                </ion-input>
+            </ion-item>
+
+            <div>
+                <div id="toolbar"
+                  hidden></div>
+
+                <div #editor
+                  no-border>
+                </div>
+
+                <input type="hidden"
+                  required
+                  formControlName="Body" />
+            </div>
+        </ion-list>
+    </form>
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons start>
+      <button ion-button navPop>
+        Cancel
+      </button>
+    </ion-buttons>
+
+    <ion-title>Prayer Request</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="submit()"
+        [disabled]="!form.valid">
+        Send
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="more bg-color-white"
+  padding>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-textarea
+      formControlName="request"
+      placeholder="Write a prayer request"
+      class="prayer-request"
+      rows="20"
+      required>
+    </ion-textarea>
+  </form>
+</ion-content>

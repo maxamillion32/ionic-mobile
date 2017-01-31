@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons start>
+      <button ion-button
+        (click)='edit()'>
+        <strong>Edit</strong>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="profile"
+  padding-top
+  padding-bottom>
+  <br>
+  <br>
+
+  <table class="profile-info">
+    <tr>
+      <td width="20%"
+        text-center>
+        <user-image [user]="user"
+          width="44"></user-image>
+      </td>
+
+      <td width="80%">
+        <ion-list>
+          <ion-item>
+            <h1>{{ user.Nickname }} {{ user.LastName }}</h1>
+          </ion-item>
+
+          <ion-item>
+            <p>
+              <strong color="gold-primary-muted"
+                text-uppercase>Info</strong>
+            </p>
+            <p>
+              {{ user.EmailAddress}} <br> {{ user.MobilePhone }}
+            </p>
+          </ion-item>
+
+          <ion-item>
+            <p>
+              <strong color="gold-primary-muted"
+                text-uppercase>Address</strong>
+            </p>
+            <p>
+              {{ user.AddressLine1 }}<br>
+              <span *ngIf="user.AddressLine2">{{ user.AddressLine1 }}<br></span>
+              <span *ngIf="user.City">{{user.City}}, {{user.StateRegion }}  {{ user.PostalCode}}</span>
+            </p>
+          </ion-item>
+
+          <ion-item>
+            <p>
+              <strong color="gold-primary-muted"
+                text-uppercase>Campus</strong>
+            </p>
+
+            <p>{{ user.CampusName }}</p>
+          </ion-item>
+        </ion-list>
+      </td>
+    </tr>
+  </table>
+
+  <ion-list padding-top
+    hidden
+    class="social-settings">
+    <ion-list-header floating>Linked Accounts</ion-list-header>
+
+    <ion-item>
+      <ion-toggle checked="false"></ion-toggle>
+      <ion-label padding-left>
+        <h2>Twitter</h2>
+        <p color="gold-primary-muted">Not Linked</p>
+      </ion-label>
+      <ion-icon name='logo-twitter'
+        class="twitter-icon"
+        item-left></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-toggle checked="false"></ion-toggle>
+      <ion-label padding-left>
+        <h2>Facebook</h2>
+        <p color="gold-primary-muted">Not Linked</p>
+      </ion-label>
+      <ion-icon name='logo-facebook'
+        class="facebook-icon"
+        item-left></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <br>
+  <br>
+
+  <button ion-button
+    class="logout"
+    full
+    color="white"
+    (click)="logout()">
+    <strong>Log Out</strong>
+  </button>
+
+</ion-content>

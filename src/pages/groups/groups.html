@@ -1,0 +1,100 @@
+<ion-header no-shadow>
+  <ion-toolbar hideBackButton
+    color="white"
+    no-border>
+    <ion-buttons start>
+      <button ion-button
+        navPop
+        icon-only>
+        <ion-icon name="arrow-back"
+          color="red-primary"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <groups-search-bar (searching)="searchResults.slideIndex = 0">
+    </groups-search-bar>
+
+    <ion-buttons end
+      *ngIf="searchBar">
+      <button ion-button
+        (click)="searchBar.layout = 'map'"
+        [hidden]="searchBar.layout == 'map' || searchBar?.isSearching"
+        icon-right
+        icon-only
+        clear>
+        <ion-icon class="icon-pin" color="red-primary"></ion-icon>
+      </button>
+
+      <button ion-button
+        (click)="searchBar.layout = 'list'"
+        icon-right
+        icon-only
+        clear>
+          <ion-icon class="icon-list" color="red-primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div (click)="searchResults.openFilters(searchBar.form.value)"
+      tappable>
+      <div>
+
+        <div style="width: 50%; text-align: left; float:left;">
+          <strong color="red-primary" *ngIf="filterString == 'No filters selected'">Choose Filter</strong>
+          <strong color="red-primary" *ngIf="filterString != 'No filters selected'">Filtered By</strong>
+
+          <br>
+
+          <div style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+            <small color="gold-primary-muted">
+              {{ filterString }}
+            </small>
+          </div>
+        </div>
+        <div style="width: 50%; text-align: right; float:left;">
+          <strong color="red-primary">{{getSearchShowingCount(searchBar)}}</strong>
+          <br>
+          <small color="gold-primary-muted" [hidden]="getSearchTotalCount(searchBar) <= 0">
+            of {{getSearchTotalCount(searchBar)}} Total Map Area Matches
+          </small>
+        </div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="groups"
+  [fullscreen]="true"
+  [ngClass]="searchBar.layout">
+
+  <div *ngIf="searchBar">
+    <groups-map [hidden]="searchBar.layout != 'map'"></groups-map>
+    <ion-toolbar *ngIf="searchBar && searchResults" [hidden]="searchBar.isSearching"
+
+    text-center
+    clear
+    no-border>
+    <button ion-button
+      class="search-area"
+      color="blue-primary"
+      small
+      [hidden]="!searchBar.showSearchArea || searchBar.layout != 'map'"
+      (click)="searchBar.search()">
+      <strong text-uppercase color="white">
+        Search This Area
+      </strong>
+    </button>
+  </ion-toolbar>
+    <group-search-results [groups]="searchBar.results"
+      [resultsLoading]="searchBar.isSearching"
+      [filters]="searchBar.form.value"
+      [layout]="searchBar.layout"
+      [class]="searchBar.layout"
+      (sliderChanged)="map.mapService.activeMarker($event)"
+      (filtersUpdated)="updateFilters($event)">
+    </group-search-results>
+  </div>
+</ion-content>
+

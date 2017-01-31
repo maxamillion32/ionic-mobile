@@ -1,0 +1,24 @@
+// Get a color.
+@function appColor($name) {
+    @return map-get($colors, $name);
+}
+
+// Get a background color.
+@function bg-color($name) {
+    @return map-get($colors, $name);
+}
+
+// Create background color class.
+@mixin bg-color-class($name, $color) {
+    .bg-color-#{$name} { background-color: $color !important; }
+}
+
+// Get a text color.
+@function text-color($name) {
+    @return map-get($colors, $name);
+}
+
+// Create text color class.
+@mixin text-color-class($name, $color) {
+    .text-color-#{$name} { color: $color !important; }
+}

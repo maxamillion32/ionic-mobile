@@ -1,0 +1,169 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons start>
+            <button ion-button
+              navPop
+              icon-left>
+        <ion-icon name="arrow-back"></ion-icon>
+        {{ previousTitle() }}
+      </button>
+        </ion-buttons>
+
+        <ion-title>Group Detail</ion-title>
+
+        <ion-buttons end
+          (click)="goToGroupInfo(group?.GroupId)"
+          *ngIf="auth.user() && auth.user()?.can('view-group', group?.GroupId)">
+            <button ion-button>
+        Info
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="refresher($event)"
+      [enabled]="group && auth.user()?.can('view-group', group.GroupId)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <p *ngIf="loading"
+      color="gold-primary-muted"
+      text-center>
+        <strong>Loading...</strong>
+    </p>
+
+    <div *ngIf="group">
+        <div class="group-image-container">
+            <group-image [group]="group"></group-image>
+        </div>
+        <div>
+            <ion-grid padding-left
+              padding-right
+              class="bg-color-white">
+                <ion-row center>
+                  <ion-col width-80>
+                    <h2>{{ group.GroupName }}</h2>
+
+                    <h4 *ngIf="group.GroupFocus"
+                      color="gold-primary">
+                      {{ group.GroupFocus }}
+                    </h4>
+                  </ion-col>
+
+                  <ion-col width-20>
+                    <button ion-button
+                      outline
+                      color="gold-primary"
+                      square
+                      icon-only
+                      (click)="socialShare()">
+
+                      <ion-icon class="icon-share"
+                        color="gold-primary">
+                      </ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-list no-margin>
+              <ion-item *ngIf="group.Leaders && group.Leaders.length">
+                <user-image [user]="group.Leaders[0]"
+                  item-left
+                  width="24"
+                  imageSize="Thumbnail">
+                </user-image>
+
+                <p class="leader-name">
+                  <span class="leader-name">
+                    {{ group.Leaders[0].FullName}}
+                  </span>
+
+                  <span *ngIf="!group.Leaders[0].HideContactInfo">
+                    <a [href]="'mailto:' + group.Leaders[0].EmailAddress"
+                      target="_self"
+                      [class.disabled]="!group.Leaders[0].EmailAddress">
+                      <ion-icon class="icon-mail-outline" color="red-primary"></ion-icon>
+                        Email Leader
+                    </a>
+                  </span>
+                </p>
+              </ion-item>
+
+              <button ion-item
+                (click)="goToGroupMembers(group.GroupId)"
+                *ngIf="auth.user() && auth.user()?.can('view-group', group.GroupId)">
+                  <h2>Group Members</h2>
+              </button>
+            </ion-list>
+        </div>
+    </div>
+
+    <div *ngIf="group">
+        <!-- Start group description & data -->
+        <div *ngIf="!auth.user() || auth.user()?.cannot('view-group', group.GroupId)">
+            <group-data-list [group]="group"></group-data-list>
+            <br>
+            <br>
+            <br>
+        </div>
+        <!-- End Group description & data -->
+
+        <!-- Start Group messages -->
+        <div *ngIf="auth.user() && auth.user()?.can('view-group', group.GroupId)">
+          <ion-list>
+            <button ion-item
+              [navPush]="messageForm"
+              [navParams]="messageFormParams"
+              *ngIf="auth.user()?.can('write-message', group.GroupId)">
+                <user-image [user]="auth.user()"
+                  imageSize="Thumbnail"
+                  width="48"
+                  item-left>
+                </user-image>
+
+                Write a new message
+              </button>
+            </ion-list>
+
+            <group-message-card *ngFor="let message of messages"
+              [message]="message"
+              [group]="group">
+            </group-message-card>
+        </div>
+        <!-- End Group messages -->
+    </div>
+
+    <div [hidden]="!allMessagesLoaded">
+        <img src="assets/img/icon-black.png"
+          class="loading-icon"
+          opacity-10>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="loadMessages($event)"
+      threshold="25%">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>
+
+<ion-footer *ngIf="group && (!auth.user() || auth.user()?.cannot('view-group', group?.GroupId))"
+  class="join-group"
+  padding-bottom
+  padding-top
+  no-border
+  clear
+  sub-footer>
+    <ion-toolbar no-border
+      clear>
+      <button ion-button
+        [disabled]="!group?.Capacity || joining"
+        (click)="joinGroup()"
+        block>
+        <span *ngIf="!joining && group.Capacity">Join this group</span>
+        <span *ngIf="joining && group.Capacity">Loading...</span>
+        <span *ngIf="!group?.Capacity">Group Full</span>
+      </button>
+    </ion-toolbar>
+</ion-footer>

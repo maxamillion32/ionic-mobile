@@ -1,0 +1,147 @@
+audio-page {
+    .backdrop {
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        -webkit-transform: translate(-5%, -10%);
+        transform: translate(-5%, -10%);
+        position: absolute;
+        height: 100%;
+        width: 110%;
+        filter: blur(15px);
+        z-index: 1;
+        opacity: 1;
+        transition: opacity 1s linear;
+
+        &:before {
+            content: "";
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(fade-out(appColor('gray-darker'), .15), appColor('gray-darkest') 60%);
+        }
+
+        &.minimized {
+            -webkit-transform: translate(-5%, 0%);
+            transform: translate(-5%, 0%);
+            opacity: 0;
+            transition: opacity 300ms ease-out;
+        }
+    }
+
+    video-image {
+        .video-image {
+            &:before{
+                padding-top: 50.25%;
+            }
+            .image {
+                margin: 0 5%;
+                width: 90%;
+            }
+        }
+    }
+
+    ion-title {
+        .toolbar-title {
+            font-size: 0.9em;
+            color: #FFF;
+        }
+    }
+
+    .audio-controls {
+        &.seek {
+            background: transparent;
+
+            .item-inner {
+                padding: 0;
+                border: none;
+
+                ion-range {
+                    //padding: 0;
+
+                    .range-bar {
+                        height: 4px;
+                        top: 17px;
+                        background: rgba(255,255,255,0.25);
+
+                        &.range-bar-active {
+                            background: appColor('red-primary');
+                        }
+                    }
+
+                    .range-knob-handle {
+                        .range-knob {
+                            top: 12px;
+                            left: 12px;
+                            width: 18px;
+                            height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .button-controls {
+        max-width: 320px;
+        margin: 0 auto;
+
+        button {
+            color: appColor('gray-light');
+        }
+
+        .pause-button,
+        .play-button {
+            width: 100px;
+            height: 100px;
+            background: #2A2924;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 101;
+            color: #FFF;
+        }
+    }
+
+    #minimized-bar {
+        position: absolute;
+        top: -96px;
+
+        ion-title {
+            small {
+                opacity: 0.65;
+            }
+        }
+
+        button {
+            font-size: 0.65em;
+            border: solid 1px rgba(255,255,255,0.25);
+            border-radius: 50%;
+            width: 32px;
+        }
+
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: fade-out(#FFFFFF, .50);
+            height: 2px;
+        }
+    }
+}
+
+
+body.background-audio-playing {
+    #minimized-bar {
+        transition: top 100ms ease-in;
+    }
+
+    &.media-page {
+        #minimized-bar {
+            top: -44px;
+            transition: top 300ms ease-in;
+        }
+    }
+}

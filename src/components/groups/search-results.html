@@ -1,0 +1,63 @@
+<div *ngIf="layout == 'list'"
+  class="list-results list-bg bg-color-tan">
+  <p padding
+    color="gold-primary-muted"
+    text-right
+    no-margin
+    *ngIf="groups && groups.length">
+    <strong>
+      {{ groups.length }} Group{{ groups.length !=1 ? 's' : ''}}
+    </strong>
+  </p>
+  <p padding
+    color="gold-primary-muted"
+    no-margin
+    text-center
+    *ngIf="resultsLoading">
+    <strong>Loading...</strong>
+  </p>
+
+  <div *ngIf="groups && !groups.length && !resultsLoading"
+    text-center>
+    <br>
+    <br>
+
+    <h3 class="text-color-gray-base">Oops, no results</h3>
+
+    <br>
+
+    <p class="text-color-gray-light">
+      Try using less filters to broaden your group search.
+    </p>
+
+    <br>
+
+    <button ion-button
+      (click)="openFilters()">
+      Update Filters
+    </button>
+
+  </div>
+
+  <group-card *ngFor="let group of groups"
+    [group]="group">
+  </group-card>
+
+  <br>
+  <br>
+</div>
+
+<div class="map-results"
+  *ngIf="slideIndex || slideIndex === 0">
+
+  <div *ngIf="groups && groups.length && layout == 'map'"
+    class="slides-container">
+    <ion-slides [options]="slideOptions"
+      #slider
+      (ionWillChange)="slideEvent($event)">
+      <ion-slide *ngFor="let group of groups">
+        <group-card [group]="group"></group-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</div>

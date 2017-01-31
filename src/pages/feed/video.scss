@@ -1,0 +1,414 @@
+video-page {
+    background-color: black;
+
+    ion-header {
+        position: relative;
+        z-index: 101;
+
+        z-index: 400;
+        opacity: 0;
+        transition: opacity 300ms ease-out;
+
+        &.visible {
+            opacity: 1;
+        }
+
+        &.fixed {
+            position: fixed;
+        }
+
+        .toolbar-background {
+            border: none !important;
+            border-style: none !important;
+        }
+    }
+
+    .fixed-content {
+        margin-top: 0 !important;
+    }
+
+    .scroll-content {
+        margin-top: 0 !important;
+    }
+
+    ion-list {
+        ion-item {
+            &:last-child {
+                border: none !important;
+            }
+        }
+    }
+    
+    .video-container {
+        z-index: 100;
+        background-color: #000;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        //min-height: 190px;
+        text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+        transition: transform 300ms ease-in-out;
+
+        &.fixed {
+            z-index: 300;
+            position: fixed;
+            transition: transform 300ms ease-in-out;
+        }
+
+        &.fullscreen:not(.minimized) {
+            width: 100vh;
+            left: -22vh;
+            top: 39vw;
+
+            &.landscape-left {
+                transform: rotate(90deg);
+
+                /*.video-player{
+                    display: block;
+                    position: static;
+                }*/
+            }
+            &.landscape-right {
+                transform: rotate(-90deg);
+            }
+        }
+        @media all and (orientation:portrait) {
+             &.fullscreen:not(.minimized) {
+                width: 100vh;
+                left: -22vh;
+                top: 39vw;
+
+                &.landscape-left {
+                    transform: rotate(90deg);
+                }
+             }
+        }
+        @media all and (orientation:landscape) {
+            &.fullscreen:not(.minimized) {
+                width: 100%;
+                left: 0;
+                top: 0;
+
+                &.landscape-left {
+                    transform: rotate(0deg);
+                }
+            }
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+30,0.8+100 */
+            background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.8) 100%);
+            /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.8) 100%);
+            /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.8) 100%);
+            /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#00000000', endColorstr='#cc000000',GradientType=0 );
+            /* IE6-9 */
+            transition: opacity 300ms ease-out;
+            opacity: 0.8;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 0;
+            z-index: 100;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.3+0,0.15+40,0+100 */
+            background: -moz-linear-gradient(top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 100%);
+            /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.15) 40%,rgba(0,0,0,0) 100%);
+            /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.15) 40%,rgba(0,0,0,0) 100%);
+            /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#4d000000', endColorstr='#00000000',GradientType=0 );
+            /* IE6-9 */
+            transition: height 300ms ease-out;
+        }
+
+        &.playing {
+            &:before {
+                opacity: 0;
+            }
+
+            &:after {
+                height: 25px;
+                transition: height 300ms ease-in;
+            }
+        }
+        .native-video-player{
+            position: absolute;
+            top: 0px;
+            z-index: 400;
+            video{
+                width:100%;
+                height:190px;
+            }
+        }
+
+        .video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            &.wistia_embed {
+                [id$="thumbnail"] {
+                    display: none !important;
+                }
+
+                [id$=html5_player] {
+                    background: transparent !important;
+                }
+
+                > div {
+                    position: absolute !important;
+                    width: 100% !important;
+                    height: 100% !important;
+
+                    > div {
+                        position: absolute !important;
+                        width: 100% !important;
+                        height: 100% !important;
+
+                        > div {
+                            position: absolute !important;
+                            width: 100% !important;
+                            height: 100% !important;
+                        }
+                    }
+                }
+            }
+
+            video {
+                width: 100% !important;
+                top: 0 !important;
+                left: 0 !important;
+                z-index: -1;
+
+                &::-webkit-media-controls,
+                &::-webkit-media-controls-play-button {
+                    display: none !important;
+                }
+            }
+        }
+
+        video-image {
+            .video-image {
+                width: 100% !important;
+                height: 100% !important;
+                z-index: 1;
+                opacity: 1;
+                transition: opacity 300ms ease-in;
+            }
+        }
+
+        &.done,
+        &.paused,
+        &.playing {
+            .video-image {
+                z-index: 0;
+                opacity: 0;
+                transition: opacity 300ms ease-out;
+            }
+        }
+
+        .video-meta {
+            position: absolute;
+            bottom: 0;
+            color: white;
+            font-weight: 600;
+            z-index: 101;
+            width: 100%;
+            .video-controls{
+                .item-inner{
+                    .input-wrapper{
+                        .range-ios{
+                            padding:4px 8px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .pause-button,
+        .play-button,
+        .reset-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 101;
+        }
+
+        &.minimized {
+            position: fixed;
+            overflow: hidden;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            z-index: 9999;
+            -webkit-transform: translate(28%, -96%) scale(0.4);
+            transform: translate(28%, -96%) scale(0.4);
+            transition: transform 200ms linear 50ms, width 100ms linear;
+
+            &:after {
+                display: none;
+            }
+
+            .pause-button,
+            .play-button,
+            .seek {
+                display: none;
+            }
+        }
+    }
+
+    .video-spacer {
+        &:before {
+            content: "";
+            display: block;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+    }
+
+    .notes {
+        color: appColor('gray-light');
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #FFF;
+        }
+
+        p {
+            color: appColor('gray-light');
+        }
+    }
+
+    .video-controls {
+        opacity: 0;
+        transition: opacity 300ms ease-out;
+
+        &.visible {
+            opacity: 1;
+            transition: opacity 300ms ease-out;
+        }
+
+        &.seek {
+            background: transparent;
+
+            .item-inner {
+                padding: 0;
+                border: none;
+
+                ion-range {
+                    //padding: 0;
+
+                    .range-bar {
+                        height: 4px;
+                        top: 17px;
+                        background: rgba(255,255,255,0.25);
+
+                        &.range-bar-active {
+                            background: appColor('red-primary');
+                        }
+                    }
+
+                    .range-knob-handle {
+                        .range-knob {
+                            top: 12px;
+                            left: 12px;
+                            width: 18px;
+                            height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #shareable-quotes {
+        button {
+            padding: 22px 10px;
+        }
+    }
+
+    #shareable-slides-container {
+        background-color: #232320;
+
+        #shareable-slides {
+            height: auto;
+            width: 80%;
+            margin: 0 auto;
+
+            .swiper-container {
+                overflow: visible;
+            }
+
+            ion-slide {
+                color: white;
+
+                img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+
+                button {
+                    position: absolute;
+                    bottom: 25px;
+                    right: 25px;
+                    font-size: 10px;
+                    padding: 1.75rem 0;
+                    border: solid 1px #FFF;
+                    color: #FFF;
+                    background-color: rgba(0,0,0,0.25);
+                }
+
+                &:before {
+                    content: "";
+                    display: block;
+                    padding-top: 60%;
+                }
+            }
+        }
+    }
+}
+
+ion-modal {
+    &.active-player {
+        z-index: 9999 !important;
+    }
+
+    ion-modal.minimized {
+        ion-content {
+            .scroll-content {
+                overflow: visible;
+            }
+
+            > * ~ * {
+                opacity: 0;
+                transition: opacity 300ms ease-out;
+            }
+        }
+    }
+}

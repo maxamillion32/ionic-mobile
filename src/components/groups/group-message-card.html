@@ -1,0 +1,50 @@
+<ion-card *ngIf="message">
+  <ion-card-header [navPush]="groupMessage"
+    [navParams]="groupMessageParams">
+    <user-image width="36"
+      [user]="message.User"
+      imageSize="Small">
+    </user-image>
+
+    <div *ngIf="message.User && message.User.FullName != 'undefined undefined'">
+      <h3>{{ message.User.FullName }}</h3>
+      <small color="gray-base">{{ message.TimeAgo }}</small>
+    </div>
+  </ion-card-header>
+
+  <ion-card-content [navPush]="groupMessage"
+    [navParams]="groupMessageParams">
+    <h2 *ngIf="message?.Title">{{ message.Title }}</h2>
+
+    <br>
+
+    <div *ngIf="message?.Body"
+      [innerHtml]="message.Body"></div>
+
+    <br>
+
+  </ion-card-content>
+  <footer *ngIf="!displayComments"
+    [navPush]="groupMessage"
+    [navParams]="groupMessageParams">
+    <ion-list>
+      <ion-item>
+        <p>
+          <ion-icon class="icon-sms-outline"
+            color="gold-primary"></ion-icon> &nbsp;
+          <span>{{ message.ChildCount }} Comment{{ message.ChildCount != 1 ? 's' : '' }}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+  </footer>
+
+  <footer *ngIf="displayComments && comments.length">
+    <ion-list>
+      <group-message-comment *ngFor="let comment of comments"
+        [comment]="comment"
+        [group]="group"
+        [hidden]="comment.removed">
+      </group-message-comment>
+    </ion-list>
+  </footer>
+</ion-card>

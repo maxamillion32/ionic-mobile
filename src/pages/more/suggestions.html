@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons start>
+      <button ion-button
+        start
+        navPop>
+        Cancel
+      </button>
+    </ion-buttons>
+
+    <ion-title>Suggestions</ion-title>
+
+    <ion-buttons end>
+      <button ion-button
+        (click)="submit()"
+        [disabled]="!form.valid">
+        Send
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="bg-color-white"
+    padding>
+    <p>
+      We are working on a long list of features for this app, including:
+    </p>
+
+    <ul>
+      <li> Mobile Check-in</li>
+      <li>Event Registration</li>
+      <li>Calendar Notifications</li>
+      <li>Ability to submit personal stories</li>
+      <li>Personalized News Feed</li>
+      <li>E-Bulletin (Notes & scripture references)</li>
+      <li>Improved Content Search</li>
+      <li>Behind-the-scenes content</li>
+    </ul>
+  </div>
+
+  <br>
+
+  <ion-list>
+    <ion-list-header floating>
+      <strong text-uppercase>Share a Suggestion</strong>
+    </ion-list-header>
+
+    <form [formGroup]="form"
+      (ngSubmit)="submit()">
+      <ion-item>
+        <ion-textarea formControlName="suggestion"
+          placeholder="Write your idea here"
+          class="suggestion-page"
+          rows="10"
+          required>
+        </ion-textarea>
+      </ion-item>
+    </form>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,14 @@
+group-message-page {
+    ion-footer {
+        input {
+            margin: 0 15px;
+            width: calc(100% - 30px);
+            border: solid 1px;
+            padding: 10px;
+            border: solid 1px appColor('tan');
+            border-radius: 8px;
+            font-size: 14px;
+            -webkit-appearance: none
+        }
+    }
+}

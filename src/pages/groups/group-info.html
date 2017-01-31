@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons start>
+            <button ion-button
+              navPop
+              icon-left>
+        <ion-icon name="arrow-back"></ion-icon>
+        Group Detail
+      </button>
+        </ion-buttons>
+
+        <ion-title>Info</ion-title>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="group">
+        <ion-list>
+            <ion-list-header>Settings</ion-list-header>
+            <ion-item>
+                <ion-toggle [(ngModel)]="groupSettings.ReceiveMessageNotifications"
+                  *ngIf="groupSettings"
+                  (ionChange)="updateSettings()">
+                </ion-toggle>
+                <ion-label padding-left>
+                    <h2>Message Notifications</h2>
+                </ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-toggle [(ngModel)]="groupSettings.HideContactInfo"
+                  *ngIf="groupSettings"
+                  (ionChange)="updateSettings()">
+                </ion-toggle>
+                <ion-label padding-left>
+                    <h2>Hide Contact Info</h2>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+
+        <ion-list group>
+            <ion-list-header floating>Information</ion-list-header>
+            <group-data-list [group]="group"></group-data-list>
+        </ion-list>
+
+    </div>
+
+    <button ion-button
+      full
+      color="white"
+      text-red
+      (click)="getDirections()">
+    <span color="red-primary"><strong>Get Directions</strong></span>
+  </button>
+
+    <br>
+    <br>
+
+    <button ion-button
+      full
+      color="white"
+      (click)="addToCalendar()">
+    <span color="red-primary"><strong>Add To Calendar</strong></span>
+  </button>
+
+    <br>
+    <br>
+
+    <span *ngIf="group">
+  <button ion-button full
+    color="white"
+    text-red
+    *ngIf="group.Participant.GroupRoleTitle != 'Leader'"
+    (click)="leaveGroup()">
+    <span color="red-primary"><strong>Leave Group</strong></span>
+    </button>
+    </span>
+
+    <br>
+    <br>
+</ion-content>

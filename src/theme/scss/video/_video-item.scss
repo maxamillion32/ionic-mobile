@@ -1,0 +1,45 @@
+video-item {
+    ion-label {
+        white-space: normal;
+    }
+
+    &[no-border] {
+        .item-inner {
+            border-bottom: none !important;
+        }
+    }
+
+    button {
+        &[disabled] {
+            opacity: 1;
+
+            .item-inner {
+                opacity: 0.5;
+            }
+
+            .video-image {
+                &:before {
+                    background-color: fade-out(black, 0.3);
+                    position: relative;
+                    z-index: 1;
+                }
+
+                &:after {
+                    font-family: '12stone-mobile-icons' !important;
+                    display: block;
+                    content: "\e90d";
+                    position: absolute;
+                    z-index: 2;
+                    left: 50%;
+                    top:50%;
+                    transform: translate(-50%, -50%);
+                    width: 100%;
+                    text-align: center;
+                    color: white;
+                    text-shadow: 0px 0px 1px fade-out(black, 0.5);
+                    font-size: 1.4em;
+                }
+            }
+        }
+    }
+}

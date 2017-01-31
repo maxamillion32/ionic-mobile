@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons start>
+            <button ion-button
+              navPop
+              icon-left>
+        <ion-icon name="arrow-back"></ion-icon>
+        Group Detail
+      </button>
+        </ion-buttons>
+        <ion-title>Members</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding-top
+  padding-bottom>
+    <br>
+    <br>
+
+    <p *ngIf="loading"
+      color="gold-primary-muted"
+      text-center>
+        <strong>Loading...</strong>
+    </p>
+
+    <ion-list *ngIf="members">
+        <ion-item *ngFor="let member of members">
+            <user-image [user]="member.UserProfile"
+              imageSize="Thumbnail"
+              width="36"
+              item-left></user-image>
+            <h2>{{ member.UserProfile.FullName }}</h2>
+            <p *ngIf="member.GroupRoleTitle == 'Leader'"
+              class="text-color-gold-primary">
+                Leader
+            </p>
+            <a [href]="'sms:' + member.UserProfile.MobilePhone"
+              (click)="smsShare(member)"
+              *ngIf="!member.HideContactInfo"
+              [class.disabled]="!member.UserProfile.MobilePhone"
+              item-right>
+                <ion-icon class="icon-sms-outline"
+                  color="red-primary"></ion-icon>
+            </a>
+
+            <a [href]="'tel:' + member.UserProfile.MobilePhone"
+              *ngIf="!member.HideContactInfo"
+              [class.disabled]="!member.UserProfile.MobilePhone"
+              item-right>
+                <ion-icon class="icon-phone-outline"
+                  color="red-primary"></ion-icon>
+            </a>
+
+            <a [href]="'mailto:' + member.UserProfile.EmailAddress"
+              *ngIf="!member.HideContactInfo"
+              target="_self"
+              [class.disabled]="!member.UserProfile.EmailAddress"
+              item-right>
+                <ion-icon class="icon-mail-outline"
+                  color="red-primary"></ion-icon>
+            </a>
+        </ion-item>
+    </ion-list>
+
+    <br>
+
+</ion-content>

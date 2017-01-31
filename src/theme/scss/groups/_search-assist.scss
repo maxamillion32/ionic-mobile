@@ -1,0 +1,49 @@
+.group-search-assist-component {
+    background: fade-out(white, 0.25);
+
+    ion-content {
+        background: transparent;
+
+        ion-slides {
+            height: calc(100% - 64px) !important;
+
+            ion-slide {
+                background: white;
+                box-shadow: 0px 1px 4px fade-out(black, 0.75);
+                padding: 1em;
+                border-radius: 8px;
+                margin: 25px;
+                width: calc(100% - 50px) !important;
+                height: calc(100% - 50px) !important;
+
+                content {
+                    display: block;
+                    // height: 90%;
+                    // width: 90%;
+                    padding: 1em;
+
+                    ion-input {
+                        border: solid 2px appColor('gold-primary');
+                        border-radius: 6px;
+                        padding: 0 1em;
+                    }
+
+                    // search-filter[title="Topic"] {
+                    //     ion-item {
+                    //         border: none;
+                    //         border-radius: 50%;
+                    //         overflow: hidden;
+                    //         display: inline-block;
+                    //         background-color: appColor('red-primary');
+                    //         color: white;
+                    //
+                    //         .checkbox-icon {
+                    //             display: none;
+                    //         }
+                    //     }
+                    // }
+                }
+            }
+        }
+    }
+}

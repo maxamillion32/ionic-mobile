@@ -1,0 +1,54 @@
+group-search-results {
+    &.map {
+        .map-results {
+            position: absolute;
+            bottom: 36px;
+            height: 180px;
+            width: 100%;
+        }
+
+        .slides-container {
+            ion-slides {
+                width: 80%;
+                margin: 0 auto;
+
+                .swiper-container {
+                    overflow: visible;
+                }
+            }
+
+            .count {
+                position: absolute;
+                top: 174px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 0.9em;
+
+                span {
+                    background-color: rgba(255,255,255,0.90);
+                    padding: 4px 20px;
+                    border-radius: 10px;
+                    display: inline-block;
+                }
+            }
+
+            group-card {
+                width: calc(100% - 10px);
+                display: block;
+                position: relative;
+
+                .group-card {
+                    border: none;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.10);
+                }
+            }
+        }
+    }
+
+    &.list {
+
+    }
+}

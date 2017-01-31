@@ -1,0 +1,21 @@
+series-card {
+
+    .card-ios {
+        margin: 0 0 2em;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    video-item {
+        display: block;
+        border-bottom: solid 1px appColor('gray-lighter');
+    }
+
+    video-image.series-image {
+        width: 100%;
+
+        .video-image {
+            width: 100% !important;
+        }
+    }
+}

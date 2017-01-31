@@ -1,0 +1,162 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons start>
+            <button ion-button
+              navPop>
+        <strong>Cancel</strong>
+      </button>
+        </ion-buttons>
+
+        <ion-title>Edit</ion-title>
+
+        <ion-buttons end>
+            <button ion-button
+              [disabled]="!form.valid"
+              (click)='submit()'>
+        <strong>Save</strong>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="profile"
+  padding-top>
+    <br>
+    <br>
+
+    <form *ngIf="form"
+      [formGroup]="form">
+        <ion-list>
+            <ion-item>
+                <user-image [user]="user"
+                  width="36"
+                  item-left></user-image>
+                <p>
+                    <a (click)="imageActionSheet()">Edit profile picture</a>
+                </p>
+            </ion-item>
+            <ion-item width-50>
+                <ion-icon class="icon-profile-outline"
+                  color="gold-primary-muted"
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>First Name</ion-label>
+                <ion-input type="text"
+                  formControlName="FirstName"
+                  required></ion-input>
+            </ion-item>
+            <ion-item width-50>
+                <ion-label floating
+                  spaced>Last Name</ion-label>
+                <ion-input type="text"
+                  formControlName="LastName"
+                  required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name=""
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>Goes By</ion-label>
+                <ion-input type="text"
+                  formControlName="Nickname"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="mail"
+                  color="gold-primary-muted"
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>Email</ion-label>
+                <ion-input type="email"
+                  formControlName="EmailAddress"
+                  required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="lock"
+                  color="gold-primary-muted"
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>Update Password</ion-label>
+                <ion-input type="password"
+                  formControlName="Password"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="ios-call"
+                  color="gold-primary-muted"
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>Phone Number</ion-label>
+                <ion-input type="tel"
+                  formControlName="MobilePhone"
+                  required></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-item>
+                <ion-icon name="ios-navigate"
+                  color="gold-primary-muted"
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>Address</ion-label>
+                <ion-input type="text"
+                  formControlName="AddressLine1"
+                  required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name=""
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>Address 2</ion-label>
+                <ion-input type="text"
+                  formControlName="AddressLine2"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name=""
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>City</ion-label>
+                <ion-input type="text"
+                  formControlName="City"
+                  required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name=""
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>State</ion-label>
+                <ion-input type="text"
+                  formControlName="StateRegion"
+                  required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-icon name=""
+                  item-left></ion-icon>
+                <ion-label floating
+                  spaced>Zip</ion-label>
+                <ion-input type="number"
+                  formControlName="PostalCode"
+                  required></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-item>
+                <ion-icon name="ios-pin"
+                  color="gold-primary-muted"
+                  item-left></ion-icon>
+                <ion-label floating>Campus</ion-label>
+                <ion-select formControlName="CampusId">
+                    <ion-option value="13">Bethlehem</ion-option>
+                    <ion-option value="14">Braselton</ion-option>
+                    <ion-option value="15">Buford</ion-option>
+                    <ion-option value="1">Central Campus</ion-option>
+                    <ion-option value="3">Flowery Branch</ion-option>
+                    <ion-option value="2">Hamilton Mill</ion-option>
+                    <ion-option value="17">Snellville</ion-option>
+                    <ion-option value="11">Sugarloaf</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </form>
+
+</ion-content>

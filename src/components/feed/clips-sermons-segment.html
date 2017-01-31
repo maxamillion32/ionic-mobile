@@ -1,0 +1,31 @@
+<div *ngIf="series.VideoClips.length"
+  padding
+  class="bg-color-white">
+  <ion-segment [(ngModel)]="mediaType"
+    color="gold-primary">
+    <ion-segment-button value="clips">
+      <strong>Clips</strong>
+    </ion-segment-button>
+    <ion-segment-button value="sermons">
+      <strong>Full Sermons</strong>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="mediaType"
+  *ngIf="series">
+  <ion-list *ngSwitchCase="'clips'">
+    <video-item *ngFor="let video of series.VideoClips"
+      [video]="video">
+    </video-item>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'sermons'">
+    <video-item *ngFor="let video of series.Messages"
+      [video]="video">
+    </video-item>
+  </ion-list>
+</div>
+
+<br>
+<br>

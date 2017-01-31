@@ -1,0 +1,110 @@
+.profile {}
+
+.login-already {
+    font-weight: 450;
+    background-color: #fff;
+}
+
+.auth-form {
+    background-color: white;
+    margin: 0 0 20px;
+
+    ion-label[floating] {
+        -webkit-transform: translate3d(0, 15px, 0);
+        transform: translate3d(0, 15px, 0);
+    }
+
+    .input-has-focus, .input-has-value {
+        ion-label[floating] {
+            -webkit-transform: translate3d(0, 0, 0) scale(0.8);
+            transform: translate3d(0, 0, 0) scale(0.8);
+        }
+    }
+
+    .name {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        .item-inner {
+           border-bottom: 1px solid appColor('tan');
+        }
+
+        .first-name {
+            margin-bottom: 1px;
+        }
+
+        .last-name {
+            margin-bottom: 1px;
+           border-bottom: 1px solid appColor('tan');
+        }
+    }
+
+    ion-list {
+        margin-bottom: 0;
+
+        .item {
+            height: 66px;
+        }
+
+        .item-inner {
+           border-bottom: 1px solid appColor('tan');
+        }
+
+        ion-item {
+            &:first-child {
+                border-top: none;
+            }
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.social-signup {
+    padding: 10px;
+
+    [width-50]:nth-child(1) {
+        padding-right:10px;
+    }
+
+    [width-50]:nth-child(2) {
+        padding-left:10px;
+    }
+
+    button {
+        height: 36px;
+        color: appColor('gold-primary-muted');
+        border-color: appColor('gold-primary-muted');
+        font-weight: bold;
+        font-size: 14px;
+
+        ion-icon {
+            margin-right: 12px;
+            font-size: 1.2em;
+        }
+
+        &.activated,
+        &.active,
+        &:active {
+            background-color: appColor('gold-primary-muted');
+            color: white;
+        }
+    }
+}
+
+.or {
+    color: appColor('gray-dark');
+}
+
+.or-line-break-left {
+    border-bottom: 1px solid #c8c7cc;
+    padding-top: 8px;
+    margin-left: 12px;
+}
+
+.or-line-break-right {
+    border-bottom: 1px solid #c8c7cc;
+    padding-top: 8px;
+    margin-right: 12px;
+}

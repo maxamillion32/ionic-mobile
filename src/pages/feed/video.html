@@ -1,0 +1,309 @@
+<ion-header class="media-header"
+  [class.fixed]="playing"
+  [class.visible]="!playing || videoTouching"
+  [hidden]="playing && !videoTouched">
+  <ion-toolbar clear
+    [hidden]="fullScreen"
+    #toolbar style="padding-top: 5px; border-style:none;">
+    <ion-buttons start>
+      <button ion-button
+        (click)="close()"
+        [disabled]="playing && !videoTouching"
+        icon-left>
+        <ion-icon class="icon-cross"
+          color="white" style="text-shadow: 1px 2px 3px rgba(0,0,0,0.3);">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button
+        (click)="toggleMinimize()"
+        [hidden]="true"
+        [disabled]="true"
+        icon-right>
+        <ion-icon class="icon-arrow-down"
+          color="white">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!-- Start Video -->
+<div class="video-container"
+  #videoElement
+  tappable
+  [class.playing]="playing"
+  [class.paused]="paused"
+  [class.done]="done"
+  [class.minimized]="minimized"
+  [class.fullscreen]="fullScreen"
+  [class.landscape-left]="fullScreen == 'landscape-left'"
+  [class.landscape-right]="fullScreen == 'landscape-right'"
+  (touchstart)="onTouch()"
+  (click)="minimized ? toggleMinimize() : ''">
+<video-image></video-image>
+<div class="video-player" [ngClass]="wistiaAsyncId()">
+  <video id="video" preload="none" poster="{{wistiaAsyncThumbnail()}}" webkit-playsinline playsinline>
+      <source src="{{wistiaAsyncURL()}}" type="video/mp4">
+  </video>
+  </div>
+<!--
+<div class="video-player" [ngClass]="wistiaAsyncId()">
+  <video id="video" preload="none" controls poster="{{wistiaAsyncThumbnail()}}" webkit-playsinline playsinline>
+      <source src="{{wistiaAsyncURL()}}" type="video/mp4">
+  </video>
+  </div>
+-->
+
+  <div class="video-meta">
+    <ion-item class="video-controls seek"
+      [class.visible]="playing && videoTouching || paused">
+      <ion-range [(ngModel)]="watched"
+        [disabled]="playing && !videoTouching"
+        (ionChange)="videoPosition($event)"
+        min="0"
+        max="100">
+        <ion-label range-left
+          text-left
+          color="white">
+          <span>{{ time }}</span>
+        </ion-label>
+
+        <ion-label range-right
+          text-right
+          color="white">
+          <span>{{ duration }}</span>
+        </ion-label>
+      </ion-range>
+
+      <button ion-button
+        item-right
+        clear
+        (click)="toggleFullScreen()"
+        [hidden]="fullScreen"
+        [disabled]="playing && !videoTouching"
+        icon-right>
+        <ion-icon color="white" class="icon-full-screen">
+        </ion-icon>
+      </button>
+
+      <button ion-button
+        item-right
+        clear
+        (click)="toggleFullScreen()"
+        [hidden]="!fullScreen"
+        [disabled]="playing && !videoTouching"
+        icon-right>
+        <ion-icon color="white" class="icon-exit-full-screen">
+        </ion-icon>
+      </button>
+    </ion-item>
+
+  </div>
+
+  <button ion-button
+    (click)="play()"
+    clear
+    class="play-button"
+    [disabled]="playing"
+    [hidden]="playing || done"
+    icon-only>
+    <ion-icon color="white"
+      class="icon-play"></ion-icon>
+  </button>
+
+  <button ion-button
+    (click)="pause()"
+    clear
+    class="pause-button"
+    [disabled]="!playing"
+    [hidden]="(!playing) || (playing && !videoTouching) || done || paused"
+    icon-only>
+    <ion-icon color="white"
+      class="icon-pause"></ion-icon>
+  </button>
+
+  <!--button ion-button
+    (click)="replay()"
+    clear
+    class="reset-button"
+    [disabled]="!done"
+    [hidden]="currentTime != duration"
+    icon-only>
+    <ion-icon color="white"
+      class="icon-reset"></ion-icon>
+  </button-->
+</div>
+<!-- End Video -->
+
+<ion-content class="bg-color-gray-darkest media"
+  [hidden]="fullScreen">
+  <div *ngIf="video">
+    <div class="video-spacer"></div>
+
+    <!-- Start Video Info -->
+    <ion-grid padding-left
+      padding-right
+      *ngIf="video">
+      <ion-row>
+        <ion-col width-80>
+          <h2 color="white"
+            no-margin>
+            {{ video.PostTitle }}
+          </h2>
+          <p color="gray-light" *ngIf="showPublishDate">{{ video.Date }}</p>
+        </ion-col>
+        <ion-col width-20>
+          <button ion-button
+            outline
+            color="gold-primary-muted"
+            icon-only
+            square
+            (click)="share()"
+            icon-only>
+            <ion-icon class="icon-share"
+              color="gold-primary-muted"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- End Video Info -->
+
+    <!-- Start Listen Block -->
+    <ion-grid class="related-block"
+      *ngIf="video.AudioUrl">
+      <ion-row>
+        <ion-col width-50>
+          <button ion-button
+            clear
+            color="white"
+            (click)="openAudio()"
+            icon-only>
+            <ion-icon name="volume-down"></ion-icon>
+            <strong>Listen</strong>
+          </button>
+        </ion-col>
+        <ion-col width-50
+          text-right>
+          <button ion-button
+            clear
+            (click)="openInItunes()" *ngIf="isApple">
+            <span color="white">View in Itunes</span>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- End Listen Block -->
+
+    <!-- Start Notes -->
+    <div class="notes"
+      *ngIf="video.PostContent"
+      padding>
+      <div [innerHtml]="(video.PostContent).slice(0, 140) + '...'"
+        *ngIf="video.PostContent.length > 140 && !expanded">
+      </div>
+      <div [innerHtml]="video.PostContent"
+        *ngIf="video.PostContent.length <= 140 || expanded">
+      </div>
+
+      <a color="gold-primary"
+        [hidden]="video.PostContent.length <= 140 "
+        (click)="expanded = !expanded">
+
+        <span [hidden]="expanded">
+                <ion-icon class="icon-caret-down"></ion-icon>more
+              </span>
+
+        <br>
+
+        <span [hidden]="!expanded">
+                <ion-icon class="icon-caret-up"></ion-icon>less
+              </span>
+      </a>
+
+      <hr color="gray-dark">
+    </div>
+    <!-- End Notes -->
+
+    <!-- Start Shareable Quotes -->
+    <ion-list id="shareable-quotes"
+      *ngIf="video && video.TweetableQuotes?.length">
+      <ion-list-header>Shareable Quotes</ion-list-header>
+      <ion-item text-wrap
+        padding
+        *ngFor="let quote of video.TweetableQuotes">
+        <ion-icon item-left
+          color="gold-primary"
+          class="icon-quote">
+        </ion-icon>
+        <h2 padding-top
+          padding-bottom>
+          {{ quote }}
+          </h2>
+        <button ion-button
+          item-right
+          square
+          icon-only
+          color="gold-primary"
+          outline
+          (click)="shareQuote(quote)"
+          icon-right>
+          <ion-icon class="icon-share">
+          </ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+    <!-- End Shareable Quotes -->
+
+    <!-- Start Related Video Clips -->
+    <ion-list *ngIf="video && video.RelatedPosts?.length">
+      <ion-list-header>Related Clips</ion-list-header>
+      <video-item *ngFor="let video of video.RelatedPosts"
+        [video]="video"
+        (opening)="toggleMinimize(); close()">
+      </video-item>
+    </ion-list>
+    <!-- End Related Video Clips -->
+
+    <!-- Start Resources -->
+    <ion-list *ngIf="video && video.Resources?.length">
+      <ion-list-header>Resources</ion-list-header>
+      <a ion-item
+        *ngFor="let resource of video.Resources"
+        (click)=openLink(resource.Value)
+        detail-none>
+        <h2 color="white">{{ resource.Name }}</h2>
+        <p color="gray-light"
+          item-right>
+          {{ resource.Type }}
+        </p>
+      </a>
+    </ion-list>
+    <!-- End Resources -->
+
+    <!-- Start Shareable Slides -->
+    <ion-list *ngIf="video && video.ShareableImages?.length">
+      <ion-list-header>Shareable Slides</ion-list-header>
+      <div id="shareable-slides-container">
+        <ion-slides id="shareable-slides">
+          <ion-slide *ngFor="let image of video.ShareableImages">
+            <img [src]="image">
+            <button ion-button
+              outline
+              color="gold-primary-muted"
+              icon-only
+              square
+              (click)="shareImage(image)">
+              <ion-icon class="icon-share"></ion-icon>
+            </button>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </ion-list>
+    <!-- End Shareable Slides -->
+
+    <br>
+    <br>
+  </div>
+</ion-content>

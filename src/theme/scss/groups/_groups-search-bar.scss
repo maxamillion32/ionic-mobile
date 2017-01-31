@@ -1,0 +1,31 @@
+groups-search-bar {
+    display: block;
+    position: relative;
+
+    ion-searchbar {
+        &.searchbar-has-value {
+            & + .location {
+                display: none;
+            }
+        }
+    }
+
+    .location {
+        position: absolute;
+        font-size: 14px;
+        color: appColor('gold-primary-muted');
+        padding: 0;
+        top: 5px;
+        right: 9px;
+        font-size: 10px;
+        width: 24px;
+
+        ion-icon {
+            padding: 0;
+
+            &.icon-compass-arrow {
+                text-shadow: 0px 0px 6px fade-out(lighten(appColor('blue-primary'), 10%), 0.75);
+            }
+        }
+    }
+}

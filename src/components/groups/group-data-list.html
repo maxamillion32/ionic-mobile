@@ -1,0 +1,145 @@
+
+        <ion-list>
+
+          <ion-item>
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Description</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                  <p style="word-wrap: break-word; white-space: pre-wrap;"
+                     [innerHtml]="(group.Description).slice(0, 140) + '...'"
+                     *ngIf="group.Description.length > 140 && !expanded">
+                  </p>
+                  <p style="word-wrap: break-word; white-space: pre-wrap;"
+                     [innerHtml]="group.Description"
+                     *ngIf="group.Description.length <= 140 || expanded">
+                  </p>
+
+                  <a color="gold-primary"
+                    [hidden]="group.Description.length <= 140"
+                    (click)="expanded = !expanded"
+                    style="font-size: 14px;">
+
+                    <span [hidden]="expanded">
+                      <ion-icon class="icon-caret-down"></ion-icon>more
+                    </span>
+
+                    <br/>
+
+                    <span [hidden]="!expanded">
+                      <ion-icon class="icon-caret-up"></ion-icon>less
+                    </span>
+                  </a>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="group.SlotsRemaining">
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Open Spots</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p>{{ group.SlotsRemaining }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="group.GroupMakeup">
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Type</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p>{{ group.GroupMakeup }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="group.MeetingDay">
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Day &amp; Time</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p>{{ group.MeetingDay }}, {{ group.Time }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="group.GroupFocus">
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Topic</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p>{{ group.GroupFocus }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item>
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Childcare</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p>{{ group.ChildcareAvailableType }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="group.FirstMeetingDate">
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Start Date</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p>{{ getFirstMeetingDate() }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="group.MeetingFrequency">
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Frequency</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p>{{ group.MeetingFrequency }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="group.Location">
+            <ion-row>
+              <ion-col width-33>
+                <p>
+                  <strong>Location</strong>
+                </p>
+              </ion-col>
+              <ion-col width-67>
+                <p style="word-wrap: break-word; white-space: normal;">{{ group.Location }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          
+        </ion-list>

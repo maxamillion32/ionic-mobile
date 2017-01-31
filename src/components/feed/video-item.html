@@ -1,0 +1,14 @@
+<button ion-item (click)="openVideo()" [disabled]="active" detail-none>
+    <video-image item-left
+    width="140"
+    [imageUrl]="video.FeaturedImage">
+    </video-image>
+
+    <div text-wrap>
+    <h2>{{ video.PostTitle }}</h2>
+    </div>
+
+    <p class="text-color-gold-primary-muted">
+    {{ video.VideoLength }}
+    </p>
+</button>

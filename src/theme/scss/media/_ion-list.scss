@@ -1,0 +1,25 @@
+.media {
+    ion-list {
+        ion-list-header {
+            color: appColor('gray-base');
+            font-weight: 900;
+            border-bottom: none;
+        }
+        .item {
+            background-color: #232320;
+            border-color: appColor('gray-darkest');
+
+            .item-inner {
+                border-color: appColor('gray-darkest');
+
+                h2 {
+                    color: white;
+                }
+
+                p {
+                    color: appColor('gray-light');
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,96 @@
+{
+  "name": "com.stone12.mobile",
+  "author": "12Stone Church",
+  "homepage": "https://www.12stone.com/",
+  "private": true,
+  "scripts": {
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  },
+  "dependencies": {
+    "@12stonechurch/12Stone-angular-mobile": "1.1.18",
+    "@12stonechurch/ngkit-mobile": "1.0.3",
+    "@angular/common": "2.2.1",
+    "@angular/compiler": "2.2.1",
+    "@angular/compiler-cli": "2.2.1",
+    "@angular/core": "2.2.1",
+    "@angular/forms": "2.2.1",
+    "@angular/http": "2.2.1",
+    "@angular/platform-browser": "2.2.1",
+    "@angular/platform-browser-dynamic": "2.2.1",
+    "@angular/platform-server": "2.2.1",
+    "@ionic/cloud-angular": "0.9.1",
+    "@ionic/storage": "1.1.7",
+    "ionic-angular": "2.0.0",
+    "ionic-native": "2.4.1",
+    "ionicons": "3.0.0",
+    "mapbox-gl": "0.32.1",
+    "moment": "2.17.1",
+    "quill": "1.2.0",
+    "rxjs": "5.0.0-beta.12",
+    "sw-toolbox": "3.4.0",
+    "zone.js": "0.6.26"
+  },
+  "devDependencies": {
+    "@ionic/app-scripts": "1.0.0",
+    "@types/mapbox-gl": "0.29.0",
+    "typescript": "2.0.9"
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-device",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-console",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-splashscreen",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-x-socialsharing",
+    {
+      "id": "cordova-plugin-facebook4",
+      "locator": "cordova-plugin-facebook4",
+      "variables": {
+        "APP_ID": "137338430018154",
+        "APP_NAME": "12Stone"
+      }
+    },
+    "cordova-plugin-geolocation",
+    "cordova-plugin-compat",
+    "cordova-plugin-calendar",
+    "cordova-plugin-camera",
+    {
+      "locator": "https://github.com/driftyco/cordova-plugin-wkwebview-engine.git",
+      "id": "cordova-plugin-wkwebview-engine"
+    },
+    {
+      "locator": "https://github.com/mikaoelitiana/cordova-plugin-ios-no-export-compliance.git",
+      "id": "cordova-plugin-ios-no-export-compliance"
+    },
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-headercolor",
+    "ionic-plugin-deploy",
+    "cordova-plugin-device-motion",
+    "cordova-plugin-crosswalk-webview",
+    {
+      "id": "phonegap-plugin-push",
+      "locator": "phonegap-plugin-push",
+      "variables": {
+        "SENDER_ID": "443544379566"
+      }
+    }
+  ],
+  "cordovaPlatforms": [
+    "ios",
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    },
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    }
+  ],
+  "description": "12Stone Church Mobile App"
+}
