@@ -84,6 +84,13 @@ export class SearchBarComponent {
     subs = {};
 
     /**
+     * Wheter or not showing the "Whoops" has already happened.
+     * 
+     * @type{boolean}
+     */
+    alreadyShowingNoResults = false;
+
+    /**
      * Constuructor.
      */
     constructor(
@@ -221,7 +228,7 @@ export class SearchBarComponent {
             Limit: 100
         }).subscribe(res => {
 
-            if(res.Results.length === 0){
+            if(res.Results.length === 0 && !this.alreadyShowingNoResults){
                 this.showNoResultsMessage();
             }
 
@@ -256,7 +263,10 @@ export class SearchBarComponent {
                     message: res.message,
                     buttons: [{
                         text: 'OK',
-                        role: 'cancel'
+                        role: 'cancel',
+                        handler: data => {
+                            this.alreadyShowingNoResults = false;
+                        }
                     }]
                 });
                 confirmAlert.present();

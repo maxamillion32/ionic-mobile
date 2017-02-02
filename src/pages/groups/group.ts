@@ -1,6 +1,6 @@
 import {
     NavController, NavParams, InfiniteScroll, ViewController, AlertController,
-    ModalController
+    ModalController, LoadingController
 } from 'ionic-angular';
 import {
     GroupService, GroupModel, GroupMessageService, GroupMessageModel, AnalyticsService
@@ -95,6 +95,14 @@ export class GroupPage implements OnInit {
     loading: boolean;
 
     /**
+     * 
+     * New chats available
+     * 
+     * @type{boolean}
+     */
+    showChatChange: boolean = false;
+
+    /**
      * Constructor.
      *
      * @param {GroupService} groupService
@@ -109,7 +117,8 @@ export class GroupPage implements OnInit {
         public auth: Authentication,
         public modal: ModalController,
         public event: Event,
-        public analyticsService: AnalyticsService
+        public analyticsService: AnalyticsService,
+        public loader: LoadingController
     ) { }
 
     /**
@@ -390,7 +399,7 @@ export class GroupPage implements OnInit {
     onMessageCreated(): void {
         this.groupMessageService
             .observers['message:created'].subscribe(message => {
-                this.messages.unshift(message);
+                this.showChatChange = true;
             });
     }
 
@@ -402,10 +411,7 @@ export class GroupPage implements OnInit {
     onMessageUpdated(): void {
         this.groupMessageService
             .observers['message:updated'].subscribe(message => {
-                let index = this.messages
-                    .findIndex(newMessage => message.ChatId == newMessage.ChatId);
-
-                this.messages[index] = message;
+                this.showChatChange = true;
             });
     }
 
@@ -417,10 +423,7 @@ export class GroupPage implements OnInit {
     onMessageDeleted(): void {
         this.groupMessageService
             .observers['message:deleted'].subscribe(m => {
-                let messages = this.messages
-                    .filter(message => m.ChatId != message.ChatId);
-
-                this.messages = messages;
+                this.showChatChange = true;
             });
     }
 
@@ -448,5 +451,25 @@ export class GroupPage implements OnInit {
     openAuthModal(): void {
         let modal = this.modal.create(AuthPage, { isModal: true });
         modal.present();
+    }
+
+    /**
+     * Gets new messages.
+     * 
+     * @return{void}
+     */
+    getNewMessages():void{
+
+        let loading = this.loader.create({
+            content: 'Refreshing Messages...'
+        });
+
+        loading.present();
+
+        this.getMessages().then(()=>{
+            setTimeout(() => {
+                loading.dismiss();
+            }, 1000);
+        });
     }
 }

@@ -106,7 +106,7 @@ export class GroupMessageFormPage {
      * @return {void}
      */
     submit(): void {
-        let loader = this.loading.create({ content: 'Loading...' });
+        let loader = this.loading.create({ content: 'Preparing Message...' });
         loader.present();
 
         let submit = (this.message) ? this.update() : this.post();

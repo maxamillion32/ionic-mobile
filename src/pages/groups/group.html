@@ -34,6 +34,21 @@
     </p>
 
     <div *ngIf="group">
+        <div style="
+        width: 50%;
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        color: white;
+        z-index: 999;
+        font-size: smaller;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 10px;
+        background-color: #893726;
+        padding: 5px;" (click)="getNewMessages()" [hidden]="!showChatChange">
+            <span>New Messages Available</span>
+        </div>
         <div class="group-image-container">
             <group-image [group]="group"></group-image>
         </div>
